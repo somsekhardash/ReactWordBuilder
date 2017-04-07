@@ -1,9 +1,13 @@
 import React from "react";
 
-export class cardList extends React.Component{
+class cardList extends React.Component{
 	render(){
 		return(
-			<h3> som </h3>	
+			<div className="som">
+				<h3> som </h3>
+			</div>	
 		);
 	}
 }
+
+export default cardList;

@@ -1,9 +1,17 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDom from "react-dom";
 
-import { cardList } from "./components/cardList";
+import CardList from "./components/cardList";
+import Ajax from "./components/Ajax";
 
 class App extends React.Component{
+	url = "https://jsonplaceholder.typicode.com/todos";
+	method = "get";
+	
+	onSucess(newResponse){
+		console.log(newResponse);
+	}
+	
 	render(){
 		return(
 			<div className="parent">
@@ -11,7 +19,14 @@ class App extends React.Component{
 					<h3> bring me back </h3>
 				</div>
 				<div className="child2">
-					<cardList/>
+					<CardList/>				
+					<Ajax 
+						ref="ajax"
+						url={this.url} 
+						method= {this.method}
+						onResponse = {this.onSucess}
+					/>
+					<button onClick={() => this.refs.ajax.getAlert()}>Fire</button> 
 				</div>
 			</div>
 		);
@@ -19,4 +34,4 @@ class App extends React.Component{
 }
 
 var parent = window.document.getElementById("main");
-render(<App/>,parent);
+ReactDom.render(<App/>,parent);
