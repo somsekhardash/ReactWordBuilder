@@ -1,6 +1,10 @@
 {
   "name": "react_basics",
   "version": "1.0.0",
+<<<<<<< HEAD
+=======
+  "description": "",
+>>>>>>> e71e5b7c7249d914c1a527c2d2d32641fb81c671
   "main": "index.js",
   "scripts": {
     "start": "npm run build",
@@ -21,6 +25,10 @@
     "babel-preset-stage-2": "^6.22.0",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2"
+<<<<<<< HEAD
   },
   "description": ""
+=======
+  }
+>>>>>>> e71e5b7c7249d914c1a527c2d2d32641fb81c671
 }

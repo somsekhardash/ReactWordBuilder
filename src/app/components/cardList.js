@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 var cardList = React.createClass({
     render : function(){
         let content= <div></div>;
@@ -37,5 +38,17 @@ var cardList = React.createClass({
 		return(<div>{content}</div>);
     }
 });
+=======
+
+class cardList extends React.Component{
+	render(){
+		return(
+			<div className="som">
+				<h3> som </h3>
+			</div>	
+		);
+	}
+}
+>>>>>>> e71e5b7c7249d914c1a527c2d2d32641fb81c671
 
 export default cardList;
