@@ -25,6 +25,9 @@ class Ajax extends React.Component{
 	}
 		
 	render(){
+		if(this.props.auto){
+			this.getAlert();
+		}
 		return(<div></div>);
 	}
 	

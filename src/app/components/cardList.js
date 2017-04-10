@@ -1,12 +1,12 @@
 import React from "react";
-<<<<<<< HEAD
 var cardList = React.createClass({
     render : function(){
+		
         let content= <div></div>;
 		if(this.props.words.data){
             content = this.props.words.data.map((item,i) => 
-				<div key={i}>
-					<div className="ui card full-width">
+				<div key={i} className="col-lg-6">
+					<div className="ui card">
 						<div className="content">
 							<div className="header">{item.word}</div>
 						</div>
@@ -23,7 +23,7 @@ var cardList = React.createClass({
 							</div>
 							<ul className="parent no-padding margin-bottom-0">
 								<li className="ui image label">
-										
+									
 								</li>
 							</ul>
 						</div>
@@ -38,17 +38,5 @@ var cardList = React.createClass({
 		return(<div>{content}</div>);
     }
 });
-=======
-
-class cardList extends React.Component{
-	render(){
-		return(
-			<div className="som">
-				<h3> som </h3>
-			</div>	
-		);
-	}
-}
->>>>>>> e71e5b7c7249d914c1a527c2d2d32641fb81c671
 
 export default cardList;
