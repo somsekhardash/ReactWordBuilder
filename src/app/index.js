@@ -12,33 +12,35 @@ class App extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-			temp : {}
+			temp : {},
+			auto: true
 		}
 	}
 	
 	onSucess(newResponse){
 		this.setState({
-			temp: {data: newResponse}
+			temp: {data: newResponse},
+			auto: false
 		})
 	}		
-	
-	/*addWord(newResponse){
-		this.changeState(newResponse);
-	}*/
 	
 	render(){
 		return(
 			<div className="parent">
 				<div className="ui two column doubling stackable grid container padding-top-25">
 					<div className="column">
-						<Card words={this.state.temp} wordAdded={this.onSucess.bind(this)}/>
+						<Card words={this.state.temp}
+							  wordAdded={this.onSucess.bind(this)}/>
 					</div>
 					<div className="column">				
-						<CardList words={this.state.temp}/>		
+						<CardList 
+							words={this.state.temp} 
+							wordAdded={this.onSucess.bind(this)}
+						/>		
 					</div>	
 					
 					<Ajax 
-						auto
+						auto={this.state.auto} 
 						ref="ajax"
 						url={this.url} 
 						method= {this.method}
