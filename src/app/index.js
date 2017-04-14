@@ -13,7 +13,8 @@ class App extends React.Component{
 		super();
 		this.state = {
 			temp : {},
-			auto: true
+			auto: true,
+			showWord: {}
 		}
 	}
 	
@@ -22,7 +23,17 @@ class App extends React.Component{
 			temp: {data: newResponse},
 			auto: false
 		})
-	}		
+	}	
+
+	itemDeleted(newData){
+		this.setState({
+			temp: {data: newData}
+		})
+	}	
+	
+	itemToUpdate(node){
+		this.refs.card.updateWord(node);
+	}
 	
 	render(){
 		return(
@@ -30,12 +41,15 @@ class App extends React.Component{
 				<div className="ui two column doubling stackable grid container padding-top-25">
 					<div className="column">
 						<Card words={this.state.temp}
-							  wordAdded={this.onSucess.bind(this)}/>
+							  wordAdded={this.onSucess.bind(this)}
+							  ref = "card"/>
 					</div>
 					<div className="column">				
 						<CardList 
 							words={this.state.temp} 
 							wordAdded={this.onSucess.bind(this)}
+							itemDeleted = {this.itemDeleted.bind(this)}
+							itemToUpdate = {this.itemToUpdate.bind(this)}
 						/>		
 					</div>	
 					

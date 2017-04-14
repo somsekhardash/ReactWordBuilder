@@ -4,20 +4,39 @@ class card extends React.Component{
 	constructor(props){
 		super();
 		this.state = {
-			syno : ["som","sdas",1213]
+			syno : [],
+			word: "",
+			meaning: "",
+			example: ""
 		}
 	}
-	
 	saveWord(){
 		let theWord = {};
+		theWord.synonyms = [];
 		theWord.word = this.state.word;
 		theWord.meaning = this.state.meaning;
 		theWord.example = this.state.example;
-		theWord.synonyms = this.state.syn;
+		debugger;
+		theWord.synonyms=this.state.syno.splice("");
 		this.props.words.data.push(theWord);
 		this.props.wordAdded(this.props.words.data);
+		this.updateWord({
+			synonyms : [],
+			word: "",
+			meaning: "",
+			example: ""
+		});
 	}
-			
+	
+	updateWord(node){
+		this.setState({
+			word: node.word,
+			meaning: node.meaning,
+			example: node.example,
+			syno: node.synonyms.splice("")
+		})
+	}
+	
 	createTest(){
 		alert("hu hu ");
 	}
@@ -42,7 +61,7 @@ class card extends React.Component{
 	
 	synChange(e){
 		this.setState({
-			syn: e.target.value 
+			syno: e.target.value 
 		})
 	}
 	
@@ -67,17 +86,17 @@ class card extends React.Component{
 		return(
 			<div className="column">
 				<div className="ui icon input fluid margin-bottom-25">
-					<input type="text" placeholder="Word" onBlur={this.wordChange.bind(this)}/>
+					<input type="text" placeholder="Word" value={this.state.word}  onChange={this.wordChange.bind(this)}/>
 					<i className="icon"></i>
 				</div>
 				<div className="ui input fluid margin-bottom-25">
-					<input type="text" placeholder="Meaning" onBlur={this.MeaningChange.bind(this)}/>
+					<input type="text" placeholder="Meaning" value={this.state.meaning} onChange={this.MeaningChange.bind(this)}/>
 				</div>
 				<div className="ui input fluid margin-bottom-25">
-					<input type="text" placeholder="Example" onBlur={this.exampleChange.bind(this)}/>
+					<input type="text" placeholder="Example" value={this.state.example} onChange={this.exampleChange.bind(this)}/>
 				</div>
 				<div className="ui input fluid margin-bottom-25">
-					<input type="text" placeholder="Synonyms"  onKeyPress={this.myFunction.bind(this)} onBlur={this.synChange.bind(this)}/>
+					<input type="text" placeholder="Synonyms" onKeyPress={this.myFunction.bind(this)}/>
 				</div>
 				<ul className="parent no-padding">
 					{this.state.syno.map((item,i)=><li key={i} className="ui image label" >

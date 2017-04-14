@@ -1,9 +1,21 @@
 import React from "react";
 
 class cardList extends React.Component{
-	   render(){
+		deleteIt(event){
+			this.props.words.data.splice(event.target.dataset.item,1);
+			this.props.itemDeleted(this.props.words.data);
+		} 
+		
+		UpdateIt(event){
+			this.props.itemToUpdate(this.props.words.data[event.target.dataset.item]);
+			this.props.words.data.splice(event.target.dataset.item,1);
+			this.props.itemDeleted(this.props.words.data);
+		}
+		
+	    render(){
 		let content= <div></div>;
 		if(!!this.props.words.data){
+			console.log(this.props.words.data);
             content = this.props.words.data.map((item,i) => 
 				<div key={i} className="col-lg-6">
 					<div className="ui card margin-bottom-25">
@@ -27,8 +39,8 @@ class cardList extends React.Component{
 							</ul>
 						</div>
 						<div className="extra content">
-							<button className="ui button orange">Delete</button>
-							<button className="ui button teal">Update</button>
+							<button className="ui button orange" data-item={i} onClick={this.deleteIt.bind(this)}>Delete</button>
+							<button className="ui button teal" data-item={i} onClick={this.UpdateIt.bind(this)}>Update</button>
 						</div>
 					</div>
 				</div>
