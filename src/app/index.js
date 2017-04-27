@@ -4,6 +4,8 @@ import ReactDom from "react-dom";
 import CardList from "./components/cardList";
 import Card from "./components/card";
 import Ajax from "./components/Ajax";
+import TestLayout from "./components/testLayout";
+
 
 class App extends React.Component{
 	url = "https://api.myjson.com/bins/z845t";
@@ -17,13 +19,21 @@ class App extends React.Component{
 			showWord: {}
 		}
 	}
-	
+
 	onSucess(newResponse){
 		this.setState({
 			temp: {data: newResponse},
 			auto: false
 		})
 	}	
+
+	onShowModel(mewData){
+		let item = document.getElementById("modelBox");
+			if(item.classList.contains("active"))
+				item.classList.remove("active");
+			else 
+				item.classList.add("active");
+	}
 
 	itemDeleted(newData){
 		this.setState({
@@ -35,6 +45,17 @@ class App extends React.Component{
 		this.refs.card.updateWord(node);
 	}
 	
+	hideModel(e){
+		let temp = e.target.className.split(" ");
+		if(temp.indexOf("active") > -1) {
+			let item = document.getElementById("modelBox");
+			if(item.classList.contains("active"))
+				item.classList.remove("active");
+			else 
+				item.classList.add("active");
+		}
+	}
+
 	render(){
 		return(
 			<div className="parent">
@@ -42,7 +63,8 @@ class App extends React.Component{
 					<div className="column">
 						<Card words={this.state.temp}
 							  wordAdded={this.onSucess.bind(this)}
-							  ref = "card"/>
+							  ref = "card"
+							  onShowModel = {this.onShowModel.bind(this)}/>
 					</div>
 					<div className="column">				
 						<CardList 
@@ -52,7 +74,11 @@ class App extends React.Component{
 							itemToUpdate = {this.itemToUpdate.bind(this)}
 						/>		
 					</div>	
-					
+					<div className="modelBox" id="modelBox" onClick={this.hideModel} >
+						<TestLayout
+							words={this.state.temp}
+						/> 
+					</div>
 					<Ajax 
 						auto={this.state.auto} 
 						ref="ajax"

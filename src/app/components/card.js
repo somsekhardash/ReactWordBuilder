@@ -16,16 +16,20 @@ class card extends React.Component{
 		theWord.word = this.state.word;
 		theWord.meaning = this.state.meaning;
 		theWord.example = this.state.example;
-		debugger;
 		theWord.synonyms=this.state.syno.splice("");
-		this.props.words.data.push(theWord);
-		this.props.wordAdded(this.props.words.data);
-		this.updateWord({
-			synonyms : [],
-			word: "",
-			meaning: "",
-			example: ""
-		});
+
+		if(!!theWord.word && !!theWord.meaning){
+			this.props.words.data.push(theWord);
+			this.props.wordAdded(this.props.words.data);
+			this.updateWord({
+				synonyms : [],
+				word: "",
+				meaning: "",
+				example: ""
+			});
+		} else {
+			alert("bang")
+		}
 	}
 	
 	updateWord(node){
@@ -38,7 +42,7 @@ class card extends React.Component{
 	}
 	
 	createTest(){
-		alert("hu hu ");
+		this.props.onShowModel();
 	}
 	
 	wordChange(e){
@@ -85,6 +89,7 @@ class card extends React.Component{
 	render(){	
 		return(
 			<div className="column">
+
 				<div className="ui icon input fluid margin-bottom-25">
 					<input type="text" placeholder="Word" value={this.state.word}  onChange={this.wordChange.bind(this)}/>
 					<i className="icon"></i>
@@ -104,7 +109,7 @@ class card extends React.Component{
 					</li>)}
 				</ul>
 				<button className="ui primary button" onClick={this.saveWord.bind(this)}>Save</button>
-				<button className="ui secondary button" onClick={this.createTest}>Test</button>
+				<button className="ui secondary button" onClick={this.createTest.bind(this)}>Test</button>
 				<div className="ui toggle checkbox">
 					<input type="checkbox" name="testSelect"/>
 					<label>Test on meaning</label>
